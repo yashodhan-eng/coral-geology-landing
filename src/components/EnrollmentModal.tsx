@@ -404,7 +404,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
                 {/* Step 1: Parent Name */}
                 {currentStep === 1 && (
-                  <>
+                  <div className="animate-fade-in">
                     <FormField
                       control={form.control}
                       name="parentName"
@@ -427,16 +427,16 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
                     <Button 
                       type="button"
                       onClick={handleNextStep}
-                      className="w-full py-5 sm:py-6 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 shadow-coral transition-all duration-300 rounded-xl"
+                      className="w-full py-5 sm:py-6 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 shadow-coral transition-all duration-300 rounded-xl mt-3 sm:mt-4"
                     >
                       Next
                     </Button>
-                  </>
+                  </div>
                 )}
 
                 {/* Step 2: Email & reCAPTCHA */}
                 {currentStep === 2 && (
-                  <>
+                  <div className="animate-fade-in">
                     <FormField
                       control={form.control}
                       name="email"
@@ -483,7 +483,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
                         {isSubmitting ? "Enrolling..." : "Book your spot now"}
                       </Button>
                     </div>
-                  </>
+                  </div>
                 )}
               </form>
             </Form>
