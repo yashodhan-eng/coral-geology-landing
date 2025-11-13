@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import heroVideo from "@/assets/hero-video.mp4";
-import videoThumbnail from "@/assets/video-thumbnail.png";
+import videoThumbnail from "@/assets/geology-thumbnail.webp";
 
 const VideoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
