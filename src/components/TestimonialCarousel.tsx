@@ -9,43 +9,43 @@ import Autoplay from "embla-carousel-autoplay";
 
 const testimonials = [
   {
-    text: "My daughter was telling us how she has an idea for new Nike shoes and was asking how she can pitch this idea to the company. We were impressed that she was thinking like this.",
+    text: "My son started a rock collection after the first class and now explains plate tectonics to anyone who will listen!",
     author: "Sarah L.",
     location: "New York",
     rating: 5,
   },
   {
-    text: "My daughter loves the hands-on projects every week!",
+    text: "My daughter loves the hands-on experiments and can't wait to share her fossils every week!",
     author: "Jennifer M.",
     location: "California",
     rating: 5,
   },
   {
-    text: "Finally, a class that teaches real business skills to kids.",
+    text: "Finally, a science class that makes geology fun and accessible for kids.",
     author: "Michael R.",
     location: "Texas",
     rating: 4.7,
   },
   {
-    text: "The teacher makes learning about companies so engaging.",
+    text: "Teacher Amalia makes learning about rocks and Earth's history so engaging and memorable.",
     author: "Lisa P.",
     location: "Florida",
     rating: 5,
   },
   {
-    text: "My son can't wait for Thursday classes every week!",
+    text: "My son can't wait for Thursday classes - he's become a little geologist!",
     author: "David K.",
     location: "Nevada",
     rating: 4.5,
   },
   {
-    text: "Great way to introduce entrepreneurship to young minds.",
+    text: "Great way to introduce earth science and spark curiosity about our planet.",
     author: "Amanda S.",
     location: "Arizona",
     rating: 4,
   },
   {
-    text: "The pitch projects build confidence and creativity.",
+    text: "The mineral testing and crystal projects build scientific thinking and observation skills.",
     author: "Robert T.",
     location: "Colorado",
     rating: 5,

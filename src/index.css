@@ -17,27 +17,27 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    /* Coral Academy Brand Colors */
-    --coral-primary: 14 94% 55%;
+    /* Geology Theme Colors - Earth Tones */
+    --coral-primary: 30 65% 45%;
     --coral-primary-foreground: 0 0% 100%;
     
-    --coral-secondary: 193 100% 85%;
+    --coral-secondary: 140 35% 75%;
     --coral-secondary-foreground: 0 0% 20%;
     
-    --coral-accent: 14 94% 55%;
-    --coral-accent-light: 14 94% 90%;
+    --coral-accent: 35 70% 50%;
+    --coral-accent-light: 35 70% 85%;
     --coral-accent-foreground: 0 0% 20%;
 
-    --primary: 14 94% 55%;
+    --primary: 30 65% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 193 100% 85%;
+    --secondary: 140 35% 75%;
     --secondary-foreground: 0 0% 20%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 14 94% 55%;
+    --accent: 35 70% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -45,13 +45,13 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 14 94% 55%;
+    --ring: 30 65% 45%;
 
     --radius: 1rem;
     
-    /* Custom shadows */
-    --coral-shadow: 0 4px 20px rgba(240, 90, 38, 0.15);
-    --coral-shadow-lg: 0 8px 30px rgba(240, 90, 38, 0.2);
+    /* Custom shadows - Earth tones */
+    --coral-shadow: 0 4px 20px rgba(120, 90, 60, 0.15);
+    --coral-shadow-lg: 0 8px 30px rgba(120, 90, 60, 0.2);
 
     --sidebar-background: 0 0% 98%;
 
