@@ -40,16 +40,16 @@ const Hero = ({ onEnrollClick }: HeroProps) => {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight md:tracking-tight">
-              Mini Business Series
+              Geology Adventures: Discover Earth's Deep Secrets
             </h1>
 
             {/* Description - Condensed on Mobile */}
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto md:mx-auto lg:mx-0 leading-relaxed md:leading-relaxed">
               <span className="block sm:hidden">
-                Every week, your child explores a real company (like MrBeast or Apple), learns business concepts, and works on pitching their own business idea. It's like a Mini MBA, but fun and hands-on!
+                Each week, learners explore new themes in geology & earth science. They will share rock collections, join discussions, and enjoy science experiments and art activities, blending the excitement of a science class with hands-on exploration.
               </span>
               <span className="hidden sm:block">
-                Every week, your child explores a real company (like MrBeast or Apple), learns business concepts, and works on pitching their own business idea. It's like a Mini MBA, but fun and hands-on!
+                Each week, learners explore new themes in geology & earth science. They will share rock collections, join discussions, and enjoy science experiments and art activities, blending the excitement of a science class with hands-on exploration.
               </span>
             </p>
 

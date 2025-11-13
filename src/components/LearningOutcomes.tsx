@@ -10,33 +10,68 @@ import {
 const learningPoints = [
   {
     icon: Lightbulb,
-    description: "Explore iconic brands like Disney, Netflix, and SpaceX to uncover what turned big ideas into billion-dollar businesses.",
+    description: "Explore geology, volcanology, paleontology, and more in exciting weekly themes that build a foundation in earth history and core science concepts.",
   },
   {
     icon: MessageSquare,
-    description: "Design logos, pitch products, & tackle creative challenges by thinking like founders and C-suite leaders.",
+    description: "Share rock collections, discuss discoveries, and engage in guided conversations about Earth's fascinating geological features and prehistoric life.",
   },
   {
     icon: TrendingUp,
-    description: "Build real business skills such as branding, pricing, marketing, & strategy through real-world examples & case studies.",
+    description: "Participate in at-home science experiments and creative art projects that extend learning beyond the classroom, making geology come alive.",
   },
 ];
 
 const schedule = [
   {
-    week: "Week 1",
-    company: "DreamWorks",
-    topics: "Storytelling, franchises & creativity in business",
+    week: "Oct 13",
+    company: "Plate Tectonics & Seismology",
+    topics: "How Earth's plates move and cause earthquakes",
   },
   {
-    week: "Week 2",
-    company: "Apple",
-    topics: "Product design, innovation & brand identity",
+    week: "Oct 20",
+    company: "The Shapes of Landforms",
+    topics: "Mountains, valleys, plains & Earth's geography",
   },
   {
-    week: "Week 3",
-    company: "Starbucks",
-    topics: "Experience-driven branding & global expansion",
+    week: "Oct 27",
+    company: "Speleology (Cave Science)",
+    topics: "Formation of caves and underground systems",
+  },
+  {
+    week: "Nov 3",
+    company: "Ask a Geologist",
+    topics: "Q&A session exploring your geology questions",
+  },
+  {
+    week: "Nov 10",
+    company: "The Rock Cycle",
+    topics: "How rocks form, change, and transform",
+  },
+  {
+    week: "Nov 17",
+    company: "Mineral Testing",
+    topics: "Hands-on identification of minerals & properties",
+  },
+  {
+    week: "Nov 24",
+    company: "The Shapes of Crystals",
+    topics: "Crystal formation and geometric structures",
+  },
+  {
+    week: "Dec 1",
+    company: "How to Find Fossils",
+    topics: "Fossil hunting techniques and preservation",
+  },
+  {
+    week: "Dec 8",
+    company: "Giants of the Past",
+    topics: "Titanoboa, deinosuchus & super salamanders",
+  },
+  {
+    week: "Dec 15",
+    company: "Prehistoric Wildlife",
+    topics: "Ancient animals and extinct ecosystems",
   },
 ];
 
@@ -79,7 +114,7 @@ const LearningOutcomes = () => {
                       <span className="text-base sm:text-lg md:text-xl">📅</span>
                     </div>
                     <h3 className="text-sm sm:text-base md:text-lg font-semibold text-foreground text-left leading-tight">
-                      Next 3 Weeks' Schedule At A Glance
+                      Upcoming Geology Topics Schedule
                     </h3>
                   </div>
                 </AccordionTrigger>
