@@ -43,6 +43,26 @@ declare global {
 // Email validation regex (browser-compatible)
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
+// Step 1 validation - only parent name
+const step1Schema = z.object({
+  parentName: z.string()
+    .trim()
+    .min(2, { message: "Parent name must be at least 2 characters" })
+    .max(100, { message: "Parent name must be less than 100 characters" }),
+});
+
+// Step 2 validation - only email
+const step2Schema = z.object({
+  email: z.string()
+    .trim()
+    .min(1, { message: "Email is required" })
+    .max(255, { message: "Email must be less than 255 characters" })
+    .refine((email) => EMAIL_REGEX.test(email), {
+      message: "Please enter a valid email address",
+    }),
+});
+
+// Complete form data type
 const enrollmentSchema = z.object({
   parentName: z.string()
     .trim()
@@ -65,6 +85,7 @@ interface EnrollmentModalProps {
 }
 
 const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
+  const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
@@ -95,11 +116,12 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
     }
   }, []);
 
-  // Render/re-render reCAPTCHA when modal opens
+  // Render/re-render reCAPTCHA when modal opens and on step 2
   useEffect(() => {
     if (!open) {
       // Reset when modal closes
       setRecaptchaToken(null);
+      setCurrentStep(1);
       form.reset();
       if (recaptchaWidgetId.current !== null && window.grecaptcha) {
         try {
@@ -109,6 +131,11 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
         }
         // Keep widget id so we can just reset on reopen (avoid re-render errors)
       }
+      return;
+    }
+
+    // Only render reCAPTCHA on step 2
+    if (currentStep !== 2) {
       return;
     }
 
@@ -198,7 +225,19 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
       clearTimeout(timeoutId);
       retryCountRef.current = 0;
     };
-  }, [open, form]);
+  }, [open, currentStep, form]);
+
+  const handleNextStep = async () => {
+    // Validate step 1 (parent name)
+    const result = await form.trigger("parentName");
+    if (result) {
+      setCurrentStep(2);
+    }
+  };
+
+  const handleBackStep = () => {
+    setCurrentStep(1);
+  };
 
   const onSubmit = async (data: EnrollmentFormData) => {
     // Check if reCAPTCHA is completed
@@ -345,65 +384,102 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
                 TRY FOR <span className="text-primary">FREE</span>
               </DialogTitle>
               <DialogDescription className="text-center text-xs sm:text-sm">
-                Start your child's business journey today. Hurry, spots are filling up fast!
+                {currentStep === 1 
+                  ? "Start your child's geology journey today. Hurry, spots are filling up fast!"
+                  : "Almost there! Just one more step to secure your spot."
+                }
               </DialogDescription>
+              <div className="flex justify-center gap-2 mt-4">
+                <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 1 ? 'bg-primary' : 'bg-primary/30'}`} />
+                <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 2 ? 'bg-primary' : 'bg-primary/30'}`} />
+              </div>
             </DialogHeader>
             
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
-              <FormField
-                control={form.control}
-                name="parentName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm">Parent Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Enter your full name" 
-                        {...field} 
-                        className="rounded-xl h-10 sm:h-11 text-sm"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-xs" />
-                  </FormItem>
+                {/* Step 1: Parent Name */}
+                {currentStep === 1 && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="parentName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Parent Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Enter your full name" 
+                              {...field} 
+                              className="rounded-xl h-10 sm:h-11 text-sm"
+                              autoFocus
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button 
+                      type="button"
+                      onClick={handleNextStep}
+                      className="w-full py-5 sm:py-6 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 shadow-coral transition-all duration-300 rounded-xl"
+                    >
+                      Next
+                    </Button>
+                  </>
                 )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm">Email Address</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="email"
-                        placeholder="your.email@example.com" 
-                        {...field}
-                        className="rounded-xl h-10 sm:h-11 text-sm"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-xs" />
-                  </FormItem>
-                )}
-              />
 
-              {/* reCAPTCHA Container */}
-              <div className="flex justify-center my-2 min-h-[78px]">
-                <div 
-                  ref={recaptchaContainerRef}
-                  id="recaptcha-container"
-                  className="flex justify-center"
-                />
-              </div>
-              
-              <Button 
-                type="submit" 
-                className="w-full py-5 sm:py-6 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 shadow-coral transition-all duration-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isSubmitting || !recaptchaToken}
-              >
-                {isSubmitting ? "Enrolling..." : "Book your spot now"}
-              </Button>
+                {/* Step 2: Email & reCAPTCHA */}
+                {currentStep === 2 && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Email Address</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="email"
+                              placeholder="your.email@example.com" 
+                              {...field}
+                              className="rounded-xl h-10 sm:h-11 text-sm"
+                              autoFocus
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* reCAPTCHA Container */}
+                    <div className="flex justify-center my-2 min-h-[78px]">
+                      <div 
+                        ref={recaptchaContainerRef}
+                        id="recaptcha-container"
+                        className="flex justify-center"
+                      />
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button 
+                        type="button"
+                        onClick={handleBackStep}
+                        variant="outline"
+                        className="py-5 sm:py-6 text-base sm:text-lg font-semibold rounded-xl"
+                      >
+                        Back
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        className="flex-1 py-5 sm:py-6 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 shadow-coral transition-all duration-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled={isSubmitting || !recaptchaToken}
+                      >
+                        {isSubmitting ? "Enrolling..." : "Book your spot now"}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </form>
             </Form>
           </div>
