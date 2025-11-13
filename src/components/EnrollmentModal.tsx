@@ -389,9 +389,14 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
                   : "Almost there! Just one more step to secure your spot."
                 }
               </DialogDescription>
-              <div className="flex justify-center gap-2 mt-4">
-                <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 1 ? 'bg-primary' : 'bg-primary/30'}`} />
-                <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 2 ? 'bg-primary' : 'bg-primary/30'}`} />
+              <div className="mt-4 space-y-2">
+                <p className="text-center text-sm font-medium text-muted-foreground">
+                  Step {currentStep} of 2
+                </p>
+                <div className="flex justify-center gap-2">
+                  <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 1 ? 'bg-primary' : 'bg-primary/30'}`} />
+                  <div className={`h-2 w-8 rounded-full transition-all ${currentStep === 2 ? 'bg-primary' : 'bg-primary/30'}`} />
+                </div>
               </div>
             </DialogHeader>
             
