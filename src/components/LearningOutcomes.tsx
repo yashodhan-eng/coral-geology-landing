@@ -24,54 +24,24 @@ const learningPoints = [
 
 const schedule = [
   {
-    week: "Oct 13",
+    week: "Week 1",
     company: "Plate Tectonics & Seismology",
     topics: "How Earth's plates move and cause earthquakes",
   },
   {
-    week: "Oct 20",
+    week: "Week 2",
     company: "The Shapes of Landforms",
     topics: "Mountains, valleys, plains & Earth's geography",
   },
   {
-    week: "Oct 27",
+    week: "Week 3",
     company: "Speleology (Cave Science)",
     topics: "Formation of caves and underground systems",
   },
   {
-    week: "Nov 3",
+    week: "Week 4",
     company: "Ask a Geologist",
     topics: "Q&A session exploring your geology questions",
-  },
-  {
-    week: "Nov 10",
-    company: "The Rock Cycle",
-    topics: "How rocks form, change, and transform",
-  },
-  {
-    week: "Nov 17",
-    company: "Mineral Testing",
-    topics: "Hands-on identification of minerals & properties",
-  },
-  {
-    week: "Nov 24",
-    company: "The Shapes of Crystals",
-    topics: "Crystal formation and geometric structures",
-  },
-  {
-    week: "Dec 1",
-    company: "How to Find Fossils",
-    topics: "Fossil hunting techniques and preservation",
-  },
-  {
-    week: "Dec 8",
-    company: "Giants of the Past",
-    topics: "Titanoboa, deinosuchus & super salamanders",
-  },
-  {
-    week: "Dec 15",
-    company: "Prehistoric Wildlife",
-    topics: "Ancient animals and extinct ecosystems",
   },
 ];
 
