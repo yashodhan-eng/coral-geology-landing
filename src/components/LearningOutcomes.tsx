@@ -10,15 +10,15 @@ import {
 const learningPoints = [
   {
     icon: Lightbulb,
-    description: "Explore geology, volcanology, paleontology, and more in exciting weekly themes that build a foundation in earth history and core science concepts.",
+    description: "Explore geology, volcanology, and paleontology through exciting weekly themes. Build a foundation in earth history and core science concepts.",
   },
   {
     icon: MessageSquare,
-    description: "Share rock collections, discuss discoveries, and engage in guided conversations about Earth's fascinating geological features and prehistoric life.",
+    description: "Share rock collections and discuss discoveries in guided conversations. Explore Earth's geological features and prehistoric life together.",
   },
   {
     icon: TrendingUp,
-    description: "Participate in at-home science experiments and creative art projects that extend learning beyond the classroom, making geology come alive.",
+    description: "Complete hands-on science experiments and creative art projects at home. Make geology come alive beyond the classroom.",
   },
 ];
 
