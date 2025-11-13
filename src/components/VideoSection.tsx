@@ -20,7 +20,7 @@ const VideoSection = () => {
               See What Our Classes Look Like
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto">
-              Watch a glimpse of our interactive business classes where kids learn, create, and have fun!
+              Watch a glimpse of our interactive geology classes where kids explore, discover, and have fun!
             </p>
           </div>
 
