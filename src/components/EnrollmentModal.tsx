@@ -363,7 +363,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
 
   return (
     <>
-      <Dialog open={open} onOpenChange={onOpenChange} modal={false}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="w-[85vw] max-w-[340px] sm:max-w-md border-2 border-primary/20 shadow-coral-lg rounded-2xl sm:rounded-3xl max-h-[90vh] overflow-y-auto p-0"
         onInteractOutside={(event) => {
         const target = event.target as HTMLElement;
