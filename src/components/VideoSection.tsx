@@ -31,7 +31,7 @@ const VideoSection = () => {
                 <img
                   src={videoThumbnail}
                   alt="Class preview"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain sm:object-cover"
                 />
                 <button
                   onClick={handlePlayClick}
