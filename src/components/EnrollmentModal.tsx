@@ -271,56 +271,40 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
         }
       }
 
-      // Call API first - don't close modal or show loader yet
-      console.log("Calling API with data:", data);
-      console.log("Using reCAPTCHA token:", freshToken ? `${freshToken.substring(0, 20)}...` : 'null');
-      const response = await adCampaignService.register({
-        name: data.parentName,
-        email: data.email,
-        source: 'MBS_Class_Page',
-        recaptchaToken: freshToken,
-      });
-
-      console.log("API response:", response);
-
-      // Only close modal and show loader on success
+      // Close modal and show loader
       onOpenChange(false);
       setShowLoader(true);
 
-      // Handle success
-      toast.success(response.message || 'Registration successful! Redirecting...');
+      // Get tracking parameters from current URL
+      const currentUrl = new URLSearchParams(window.location.search);
+      const source = currentUrl.get('source') || '';
+      const referrerId = currentUrl.get('referrerId') || '';
 
-      const res = await adCampaignService.signin({
+      // Build redirect URL with all query parameters
+      const query = new URLSearchParams({
+        name: data.parentName,
         email: data.email,
+        source: source,
+        referrerId: referrerId,
+        landing_variant: 'GeologyLanding',
+        redirectTo: 'https://www.coralacademy.com/class/geologybyamalia-047f95a1-a506-421b-8f13-a986ac1eb225',
         recaptchaToken: freshToken,
-      });
+        landing_secret: 'ca_landing_2025_3xD9pQ1Z'
+      }).toString();
 
-      console.log("Sign-in response:", res);
-      const magicLink = res?.magicLink;
-      console.log("magicLink: ",magicLink)
-      if (magicLink) {
-        // Redirect to magic link after short delay to allow user to see success toast
-        setTimeout(() => {
-          window.location.href = magicLink;
-        }, 2000);
-        console.log("...")
-      } else {
-        console.error("No magic link received in sign-in response");
-        toast.error("Failed to get sign-in link. Please check your email manually.");
-        setShowLoader(false);
-        setIsSubmitting(false);
-      }
+      // Show success message
+      toast.success('Registration successful! Redirecting...');
 
-      // // Redirect to class page after a short delay
-      // setTimeout(() => {
-      //   window.location.href = "https://www.coralacademy.com/class/minibusinessseries-c61a217d-9826-45e5-81a7-ff7cdca717b3";
-      // }, 2000);
+      // Redirect to thank-you page after short delay
+      setTimeout(() => {
+        window.location.href = `https://coralacademy.com/thank-you-landing?${query}`;
+      }, 1500);
     } catch (error: any) {
-      console.error("API error:", error);
+      console.error("Submission error:", error);
       setIsSubmitting(false);
+      setShowLoader(false);
       
       // Reset reCAPTCHA on error so user can retry
-      // Use setTimeout to ensure reset happens after state updates
       setTimeout(() => {
         if (recaptchaWidgetId.current !== null && window.grecaptcha) {
           try {
@@ -328,36 +312,13 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
             console.log('reCAPTCHA reset successfully');
           } catch (resetError) {
             console.error('Error resetting reCAPTCHA:', resetError);
-            // If reset fails, try to re-render by clearing widget ID
             recaptchaWidgetId.current = null;
           }
-        } else {
-          console.warn('reCAPTCHA widget ID is null or grecaptcha not available');
         }
       }, 100);
       
-      // Clear the token state
       setRecaptchaToken(null);
-      
-      // Handle different error types with appropriate messages
-      let errorMessage = 'Registration failed. Please try again.';
-      
-      if (error.errorType === 'duplicate_email') {
-        errorMessage = 'Email already registered. Please use a different email address.';
-      } else if (error.errorType === 'validation_error') {
-        errorMessage = error.message || 'Please check your information and try again.';
-      } else if (error.errorType === 'captcha_error') {
-        errorMessage = 'reCAPTCHA verification failed. Please complete it again and try.';
-        if (error.error_codes) {
-          console.error('reCAPTCHA error codes:', error.error_codes);
-        }
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
-      
-      toast.error(errorMessage);
-      // Modal should stay open - don't change its state on error
-      // Don't show loader or redirect on error
+      toast.error('Submission failed. Please try again.');
     }
   };
 
