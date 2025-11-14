@@ -24,6 +24,7 @@ import { adCampaignService } from "@/lib/api";
 
 declare global {
   interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
     grecaptcha: {
       ready: (callback: () => void) => void;
       render: (container: HTMLElement, options: {
@@ -291,6 +292,15 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
         recaptchaToken: freshToken,
         landing_secret: 'ca_landing_2025_3xD9pQ1Z'
       }).toString();
+
+      // Track GA4 conversion event
+      if (window.gtag) {
+        window.gtag('event', 'conversion', {
+          event_category: 'form_submission',
+          event_label: 'enrollment_form_submit',
+          value: 1
+        });
+      }
 
       // Show success message
       toast.success('Registration successful! Redirecting...');

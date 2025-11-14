@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+  }
+}
 interface HeroProps {
   onEnrollClick: () => void;
 }
@@ -52,7 +58,17 @@ const Hero = ({
 
             {/* CTA Button */}
             <button 
-              onClick={onEnrollClick} 
+              onClick={() => {
+                // Track GA4 event
+                if (window.gtag) {
+                  window.gtag('event', 'cta_click', {
+                    event_category: 'engagement',
+                    event_label: 'hero_try_free',
+                    button_location: 'hero_section'
+                  });
+                }
+                onEnrollClick();
+              }} 
               data-track-id="cta-hero-try-free"
               className="w-full sm:w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl"
             >
