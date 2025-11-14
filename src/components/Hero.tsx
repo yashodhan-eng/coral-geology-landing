@@ -71,7 +71,7 @@ const Hero = ({
             <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-10 lg:gap-12 pt-2 sm:pt-3 md:pt-4">
               <div className="text-center">
                 <div className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold text-primary">100+ years</div>
-                <div className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground mt-1 md:mt-2 leading-tight mx-[10px] md:mx-0">Cumulative Teacher Experience</div>
+                <div className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground mt-1 md:mt-2 leading-tight mx-[10px] md:mx-0">of Collective Teaching Experience</div>
               </div>
               <div className="text-center md:border-l md:border-r md:border-primary/20 lg:border-0">
                 <div className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold text-primary">Stanford</div>
