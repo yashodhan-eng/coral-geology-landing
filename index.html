@@ -15,7 +15,61 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-BBYT2EHJL1');
+      
+      // Get URL parameters for custom dimensions
+      const urlParams = new URLSearchParams(window.location.search);
+      const source = urlParams.get('source') || 'direct';
+      const referrerId = urlParams.get('referrerId') || 'none';
+      
+      // Configure GA4 with custom dimensions
+      gtag('config', 'G-BBYT2EHJL1', {
+        'custom_map': {
+          'dimension1': 'source',
+          'dimension2': 'referrerId'
+        },
+        'source': source,
+        'referrerId': referrerId
+      });
+      
+      // Track scroll depth
+      let scrollDepths = [25, 50, 75, 100];
+      let trackedDepths = [];
+      
+      window.addEventListener('scroll', function() {
+        let scrollPercentage = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+        
+        scrollDepths.forEach(function(depth) {
+          if (scrollPercentage >= depth && !trackedDepths.includes(depth)) {
+            trackedDepths.push(depth);
+            gtag('event', 'scroll_depth', {
+              'event_category': 'engagement',
+              'event_label': depth + '%',
+              'value': depth
+            });
+          }
+        });
+      });
+      
+      // Track outbound clicks
+      document.addEventListener('click', function(e) {
+        let target = e.target;
+        while (target && target.tagName !== 'A') {
+          target = target.parentElement;
+        }
+        
+        if (target && target.href) {
+          let currentDomain = window.location.hostname;
+          let linkDomain = new URL(target.href).hostname;
+          
+          if (linkDomain !== currentDomain && linkDomain !== '') {
+            gtag('event', 'outbound_click', {
+              'event_category': 'engagement',
+              'event_label': target.href,
+              'transport_type': 'beacon'
+            });
+          }
+        }
+      });
     </script>
     <!-- End Google Analytics 4 -->
     
