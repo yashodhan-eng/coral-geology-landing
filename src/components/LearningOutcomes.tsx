@@ -1,6 +1,13 @@
 import { Lightbulb, MessageSquare, TrendingUp, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+  }
+}
 const learningPoints = [{
   icon: Lightbulb,
   description: "Explore geology, volcanology, and paleontology through exciting weekly themes. Build a foundation in earth history and core science concepts."
@@ -29,7 +36,61 @@ const schedule = [{
   topics: "Learn about Titanoboa, deinosuchus, super salamanders & more"
 }];
 const LearningOutcomes = () => {
-  return <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-4 bg-gradient-to-b from-background to-coral-secondary/10">
+  const sectionRef = useRef<HTMLElement>(null);
+  const hasTrackedView = useRef(false);
+  const [accordionValue, setAccordionValue] = useState<string>("");
+
+  // Track section view using Intersection Observer
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTrackedView.current) {
+            hasTrackedView.current = true;
+            if (window.gtag) {
+              window.gtag('event', 'section_view', {
+                event_category: 'engagement',
+                event_label: 'learning_outcomes_section',
+                section_name: 'What Kids Learn'
+              });
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of section is visible
+      }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Track accordion interactions
+  const handleAccordionChange = (value: string) => {
+    setAccordionValue(value);
+    
+    if (value && window.gtag) {
+      window.gtag('event', 'accordion_expand', {
+        event_category: 'engagement',
+        event_label: 'schedule_accordion',
+        action: 'expand'
+      });
+    } else if (!value && window.gtag) {
+      window.gtag('event', 'accordion_collapse', {
+        event_category: 'engagement',
+        event_label: 'schedule_accordion',
+        action: 'collapse'
+      });
+    }
+  };
+
+  return <section ref={sectionRef} className="py-8 sm:py-10 md:py-12 lg:py-16 px-4 bg-gradient-to-b from-background to-coral-secondary/10">
       <div className="container max-w-4xl mx-auto">
         <div className="text-center mb-5 sm:mb-6 md:mb-8 fade-in-up">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mx-0">
@@ -53,7 +114,13 @@ const LearningOutcomes = () => {
 
           {/* Schedule Section */}
           <Card className="p-3 sm:p-4 md:p-5 border-primary/20 overflow-hidden">
-            <Accordion type="single" collapsible className="w-full">
+            <Accordion 
+              type="single" 
+              collapsible 
+              className="w-full"
+              value={accordionValue}
+              onValueChange={handleAccordionChange}
+            >
               <AccordionItem value="schedule" className="border-none">
                 <AccordionTrigger className="hover:no-underline py-0">
                   <div className="flex items-center gap-2 sm:gap-3">
