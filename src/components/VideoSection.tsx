@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
-import heroVideo from "@/assets/hero-video.mp4";
+import geologyVideo from "@/assets/geology-video.mp4";
 import videoThumbnail from "@/assets/geology-video-thumbnail.png";
 
 const VideoSection = () => {
@@ -45,7 +45,7 @@ const VideoSection = () => {
               </>
             ) : (
               <video
-                src={heroVideo}
+                src={geologyVideo}
                 controls
                 autoPlay
                 className="w-full h-full"
