@@ -12,19 +12,19 @@ const learningPoints = [{
   description: "Complete hands-on science experiments and creative art projects at home. Make geology come alive beyond the classroom."
 }];
 const schedule = [{
-  week: "Nov 17",
+  week: "Week 1",
   company: "Mineral Testing",
   topics: "Identify minerals using hardness, streak, and other tests"
 }, {
-  week: "Nov 24",
+  week: "Week 2",
   company: "The Shapes of Crystals",
   topics: "Explore crystal structures and geometric formations"
 }, {
-  week: "Dec 1",
+  week: "Week 3",
   company: "How to Find Fossils",
   topics: "Learn fossil hunting techniques and preservation"
 }, {
-  week: "Dec 8",
+  week: "Week 4",
   company: "Giants of the Past",
   topics: "Titanoboa, deinosuchus, super salamanders & more"
 }];
