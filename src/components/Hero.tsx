@@ -89,12 +89,12 @@ const Hero = ({
             </button>
 
             {/* Class Schedule */}
-            <div className="inline-flex flex-col items-center gap-1.5 bg-background border border-border/40 px-6 py-3 sm:px-8 sm:py-4 rounded-full shadow-sm mx-auto">
+            <div className="inline-flex flex-col items-center md:items-start gap-1.5 bg-background border border-border/40 md:border-0 md:bg-transparent px-6 py-3 sm:px-8 sm:py-4 md:px-0 md:py-0 rounded-full md:rounded-none shadow-sm md:shadow-none mx-auto md:mx-0 md:mt-6 md:mb-8">
               <span className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Weekly Batches</span>
-              <div className="text-sm sm:text-base md:text-lg font-semibold text-primary text-center">
-                <span className="block sm:inline">Mon 10:00 AM & 3:00 PM PST</span>
-                <span className="hidden sm:inline">, </span>
-                <span className="block sm:inline">Tue 1:00 PM PST</span>
+              <div className="text-sm sm:text-base md:text-lg font-semibold text-primary text-center md:text-left">
+                <span className="block sm:inline md:block">Mon 10:00 AM & 3:00 PM PST</span>
+                <span className="hidden sm:inline md:hidden">, </span>
+                <span className="block sm:inline md:block">Tue 1:00 PM PST</span>
               </div>
             </div>
 
