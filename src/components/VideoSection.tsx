@@ -22,6 +22,7 @@ const VideoSection = () => {
   });
 
   const handlePlayClick = () => {
+    console.log('🔵 Video play clicked - Sending to Clarity');
     setIsPlaying(true);
     
     // Track video start
@@ -35,8 +36,11 @@ const VideoSection = () => {
     
     // Track Microsoft Clarity video event
     if (window.clarity) {
+      console.log('✅ Clarity event sent: video_start');
       window.clarity('event', 'video_start');
       window.clarity('set', 'video_played', 'geology_class_preview');
+    } else {
+      console.warn('⚠️ Clarity not loaded');
     }
   };
 
