@@ -22,6 +22,8 @@ const CTABanner = ({ onEnrollClick }: CTABannerProps) => {
         <Button 
           size="lg"
           onClick={() => {
+            console.log('🔵 Footer CTA clicked - Sending to Clarity');
+            
             // Track GA4 event
             if (window.gtag) {
               window.gtag('event', 'cta_click', {
@@ -33,8 +35,11 @@ const CTABanner = ({ onEnrollClick }: CTABannerProps) => {
             
             // Track Microsoft Clarity event
             if (window.clarity) {
+              console.log('✅ Clarity event sent: cta_click_footer');
               window.clarity('event', 'cta_click_footer');
               window.clarity('set', 'button_clicked', 'footer_try_free');
+            } else {
+              console.warn('⚠️ Clarity not loaded');
             }
             
             onEnrollClick();

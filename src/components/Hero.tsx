@@ -60,6 +60,8 @@ const Hero = ({
             {/* CTA Button */}
             <button 
               onClick={() => {
+                console.log('🔵 Hero CTA clicked - Sending to Clarity');
+                
                 // Track GA4 event
                 if (window.gtag) {
                   window.gtag('event', 'cta_click', {
@@ -71,8 +73,11 @@ const Hero = ({
                 
                 // Track Microsoft Clarity event
                 if (window.clarity) {
+                  console.log('✅ Clarity event sent: cta_click_hero');
                   window.clarity('event', 'cta_click_hero');
                   window.clarity('set', 'button_clicked', 'hero_try_free');
+                } else {
+                  console.warn('⚠️ Clarity not loaded');
                 }
                 
                 onEnrollClick();

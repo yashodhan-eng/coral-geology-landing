@@ -305,6 +305,8 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
       
       // Track Microsoft Clarity conversion
       if (window.clarity) {
+        console.log('🔵 Form submitted - Sending to Clarity');
+        console.log('✅ Clarity event sent: enrollment_form_submit');
         window.clarity('event', 'enrollment_form_submit');
         window.clarity('set', 'form_submitted', 'enrollment');
         window.clarity('set', 'user_type', 'enrolled');
