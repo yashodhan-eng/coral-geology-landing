@@ -3,9 +3,18 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
+
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+  }
+}
 
 const testimonials = [
   {
@@ -57,13 +66,59 @@ interface TestimonialCarouselProps {
 }
 
 const TestimonialCarousel = ({ compact = false }: TestimonialCarouselProps) => {
+  const [api, setApi] = useState<CarouselApi>();
   const plugin = useRef(
     Autoplay({ delay: compact ? 2000 : 2500, stopOnInteraction: false })
   );
 
+  useEffect(() => {
+    if (!api) return;
+
+    // Track initial view
+    if (window.gtag) {
+      window.gtag('event', 'testimonial_view', {
+        event_category: 'engagement',
+        event_label: 'carousel_initial_load',
+        carousel_type: compact ? 'compact' : 'full'
+      });
+    }
+
+    // Track slide changes
+    api.on('select', () => {
+      const currentIndex = api.selectedScrollSnap();
+      if (window.gtag) {
+        window.gtag('event', 'testimonial_navigation', {
+          event_category: 'engagement',
+          event_label: `slide_${currentIndex + 1}`,
+          carousel_type: compact ? 'compact' : 'full',
+          slide_number: currentIndex + 1
+        });
+      }
+    });
+
+    // Track user interactions (manual navigation)
+    const handlePointerDown = () => {
+      if (window.gtag) {
+        window.gtag('event', 'testimonial_interaction', {
+          event_category: 'engagement',
+          event_label: 'manual_navigation',
+          carousel_type: compact ? 'compact' : 'full'
+        });
+      }
+    };
+
+    const container = api.containerNode();
+    container.addEventListener('pointerdown', handlePointerDown);
+
+    return () => {
+      container.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [api, compact]);
+
   return (
     <div className="w-full overflow-hidden">
       <Carousel
+        setApi={setApi}
         opts={{
           align: "start",
           loop: true,
