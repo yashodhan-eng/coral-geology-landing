@@ -13,6 +13,7 @@ import Autoplay from "embla-carousel-autoplay";
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    clarity?: (command: string, ...args: any[]) => void;
   }
 }
 
@@ -82,6 +83,12 @@ const TestimonialCarousel = ({ compact = false }: TestimonialCarouselProps) => {
         carousel_type: compact ? 'compact' : 'full'
       });
     }
+    
+    // Track in Microsoft Clarity
+    if (window.clarity) {
+      window.clarity('event', 'testimonial_view');
+      window.clarity('set', 'carousel_type', compact ? 'compact' : 'full');
+    }
 
     // Track slide changes
     api.on('select', () => {
@@ -94,6 +101,12 @@ const TestimonialCarousel = ({ compact = false }: TestimonialCarouselProps) => {
           slide_number: currentIndex + 1
         });
       }
+      
+      // Track in Microsoft Clarity
+      if (window.clarity) {
+        window.clarity('event', 'testimonial_navigation');
+        window.clarity('set', 'slide_number', (currentIndex + 1).toString());
+      }
     });
 
     // Track user interactions (manual navigation)
@@ -104,6 +117,11 @@ const TestimonialCarousel = ({ compact = false }: TestimonialCarouselProps) => {
           event_label: 'manual_navigation',
           carousel_type: compact ? 'compact' : 'full'
         });
+      }
+      
+      // Track in Microsoft Clarity
+      if (window.clarity) {
+        window.clarity('event', 'testimonial_manual_interaction');
       }
     };
 
