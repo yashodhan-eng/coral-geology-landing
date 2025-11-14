@@ -289,7 +289,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
         source: source,
         referrerId: referrerId,
         landing_variant: 'GeologyLanding',
-        redirectTo: 'https://www.coralacademy.com/class/geologybyamalia-047f95a1-a506-421b-8f13-a986ac1eb225',
+        redirectTo: import.meta.env.VITE_APP_ENV === 'development' ? 'https://www.preprod.coralacademy.com/class/this-class-will-be-on-zoom-sdk-8f0e37aa-664c-400e-bb6f-3757b27b38e5' : 'https://www.coralacademy.com/class/geologybyamalia-047f95a1-a506-421b-8f13-a986ac1eb225',
         recaptchaToken: freshToken,
         landing_secret: 'ca_landing_2025_3xD9pQ1Z'
       }).toString();
@@ -317,7 +317,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
 
       // Redirect to thank-you page after short delay
       setTimeout(() => {
-        window.location.href = `https://coralacademy.com/thank-you-landing?${query}`;
+        window.location.href = `${import.meta.env.VITE_REDIRECT_BASE_URL}/thank-you-landing?${query}`;
       }, 1500);
     } catch (error: any) {
       console.error("Submission error:", error);
