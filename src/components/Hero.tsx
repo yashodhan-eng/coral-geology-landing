@@ -89,9 +89,13 @@ const Hero = ({
             </button>
 
             {/* Class Schedule */}
-            <div className="inline-flex flex-col items-center gap-1.5 bg-background border border-border/40 px-6 py-3 sm:px-8 sm:py-4 rounded-full shadow-sm mx-auto lg:mx-0">
+            <div className="inline-flex flex-col items-center gap-1.5 bg-background border border-border/40 px-6 py-3 sm:px-8 sm:py-4 rounded-full shadow-sm mx-auto">
               <span className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Weekly Batches</span>
-              <span className="text-sm sm:text-base md:text-lg font-semibold text-primary">Mon 10:00 AM & 3:00 PM PST, Tue 1:00 PM PST</span>
+              <div className="text-sm sm:text-base md:text-lg font-semibold text-primary text-center">
+                <span className="block sm:inline">Mon 10:00 AM & 3:00 PM PST</span>
+                <span className="hidden sm:inline">, </span>
+                <span className="block sm:inline">Tue 1:00 PM PST</span>
+              </div>
             </div>
 
             {/* Mobile Testimonial Carousel - Compact Version */}
