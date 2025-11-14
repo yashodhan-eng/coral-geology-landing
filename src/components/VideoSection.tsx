@@ -1,13 +1,112 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import geologyVideo from "@/assets/geology-video.mp4";
 import videoThumbnail from "@/assets/geology-video-thumbnail.png";
 
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+  }
+}
+
 const VideoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoTracked = useRef({
+    started: false,
+    quarter: false,
+    half: false,
+    threeQuarter: false,
+    completed: false
+  });
 
   const handlePlayClick = () => {
     setIsPlaying(true);
+    
+    // Track video start
+    if (window.gtag) {
+      window.gtag('event', 'video_start', {
+        event_category: 'video',
+        event_label: 'geology_class_preview',
+        video_title: 'Geology Class Preview'
+      });
+    }
+  };
+
+  const handleVideoTimeUpdate = () => {
+    if (!videoRef.current) return;
+    
+    const video = videoRef.current;
+    const percentage = (video.currentTime / video.duration) * 100;
+
+    // Track 25% progress
+    if (percentage >= 25 && !videoTracked.current.quarter) {
+      videoTracked.current.quarter = true;
+      if (window.gtag) {
+        window.gtag('event', 'video_progress', {
+          event_category: 'video',
+          event_label: 'geology_class_preview_25',
+          value: 25
+        });
+      }
+    }
+
+    // Track 50% progress
+    if (percentage >= 50 && !videoTracked.current.half) {
+      videoTracked.current.half = true;
+      if (window.gtag) {
+        window.gtag('event', 'video_progress', {
+          event_category: 'video',
+          event_label: 'geology_class_preview_50',
+          value: 50
+        });
+      }
+    }
+
+    // Track 75% progress
+    if (percentage >= 75 && !videoTracked.current.threeQuarter) {
+      videoTracked.current.threeQuarter = true;
+      if (window.gtag) {
+        window.gtag('event', 'video_progress', {
+          event_category: 'video',
+          event_label: 'geology_class_preview_75',
+          value: 75
+        });
+      }
+    }
+
+    // Track 100% completion
+    if (percentage >= 95 && !videoTracked.current.completed) {
+      videoTracked.current.completed = true;
+      if (window.gtag) {
+        window.gtag('event', 'video_complete', {
+          event_category: 'video',
+          event_label: 'geology_class_preview',
+          video_title: 'Geology Class Preview'
+        });
+      }
+    }
+  };
+
+  const handleVideoPause = () => {
+    if (window.gtag && videoRef.current) {
+      const percentage = Math.round((videoRef.current.currentTime / videoRef.current.duration) * 100);
+      window.gtag('event', 'video_pause', {
+        event_category: 'video',
+        event_label: 'geology_class_preview',
+        value: percentage
+      });
+    }
+  };
+
+  const handleVideoPlay = () => {
+    if (window.gtag && videoTracked.current.started) {
+      window.gtag('event', 'video_resume', {
+        event_category: 'video',
+        event_label: 'geology_class_preview'
+      });
+    }
+    videoTracked.current.started = true;
   };
 
   return (
@@ -45,9 +144,13 @@ const VideoSection = () => {
               </>
             ) : (
               <video
+                ref={videoRef}
                 src={geologyVideo}
                 controls
                 autoPlay
+                onTimeUpdate={handleVideoTimeUpdate}
+                onPause={handleVideoPause}
+                onPlay={handleVideoPlay}
                 className="w-full h-full"
               >
                 Your browser does not support the video tag.
