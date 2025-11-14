@@ -51,7 +51,7 @@ const Hero = ({
             </p>
 
             {/* CTA Button */}
-            <button onClick={onEnrollClick} className="w-full sm:w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl lg:animate-pulse lg:hover:animate-none">
+            <button onClick={onEnrollClick} className="w-full sm:w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl">
               TRY FOR FREE
             </button>
 
