@@ -57,44 +57,47 @@ const Hero = ({
               </span>
             </p>
 
-            {/* CTA Button */}
-            <button 
-              onClick={() => {
-                console.log('🔵 Hero CTA clicked - Sending to Clarity');
-                
-                // Track GA4 event
-                if (window.gtag) {
-                  window.gtag('event', 'cta_click', {
-                    event_category: 'engagement',
-                    event_label: 'hero_try_free',
-                    button_location: 'hero_section'
-                  });
-                }
-                
-                // Track Microsoft Clarity event
-                if (window.clarity) {
-                  console.log('✅ Clarity event sent: cta_click_hero');
-                  window.clarity('event', 'cta_click_hero');
-                  window.clarity('set', 'button_clicked', 'hero_try_free');
-                } else {
-                  console.warn('⚠️ Clarity not loaded');
-                }
-                
-                onEnrollClick();
-              }}
-              data-track-id="cta-hero-try-free"
-              className="w-full sm:w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl"
-            >
-              TRY FOR FREE
-            </button>
+            {/* CTA + Weekly Batches Group */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-4 md:gap-6 lg:gap-8">
+              {/* CTA Button */}
+              <button 
+                onClick={() => {
+                  console.log('🔵 Hero CTA clicked - Sending to Clarity');
+                  
+                  // Track GA4 event
+                  if (window.gtag) {
+                    window.gtag('event', 'cta_click', {
+                      event_category: 'engagement',
+                      event_label: 'hero_try_free',
+                      button_location: 'hero_section'
+                    });
+                  }
+                  
+                  // Track Microsoft Clarity event
+                  if (window.clarity) {
+                    console.log('✅ Clarity event sent: cta_click_hero');
+                    window.clarity('event', 'cta_click_hero');
+                    window.clarity('set', 'button_clicked', 'hero_try_free');
+                  } else {
+                    console.warn('⚠️ Clarity not loaded');
+                  }
+                  
+                  onEnrollClick();
+                }}
+                data-track-id="cta-hero-try-free"
+                className="w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl"
+              >
+                TRY FOR FREE
+              </button>
 
-            {/* Class Schedule */}
-            <div className="inline-flex flex-col items-center gap-1.5 bg-background border border-border/40 px-6 py-3 sm:px-8 sm:py-4 rounded-full shadow-sm mx-auto">
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Weekly Batches</span>
-              <div className="text-sm sm:text-base md:text-lg font-semibold text-primary text-center">
-                <span className="block sm:inline">Mon 10:00 AM & 3:00 PM PST</span>
-                <span className="hidden sm:inline">, </span>
-                <span className="block sm:inline">Tue 1:00 PM PST</span>
+              {/* Weekly Batches Block */}
+              <div className="flex flex-col items-center gap-1.5 bg-background/50 border border-border/30 px-6 py-3.5 sm:px-8 md:py-[1.4rem] rounded-lg shadow-sm mx-auto md:mx-0">
+                <span className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wide uppercase">Weekly Batches</span>
+                <div className="text-sm sm:text-base md:text-lg font-semibold text-primary text-center whitespace-nowrap">
+                  <span className="block sm:inline">Mon 10:00 AM & 3:00 PM PST</span>
+                  <span className="hidden sm:inline">, </span>
+                  <span className="block sm:inline">Tue 1:00 PM PST</span>
+                </div>
               </div>
             </div>
 
