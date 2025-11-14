@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    clarity?: (command: string, ...args: any[]) => void;
   }
 }
 const learningPoints = [{
@@ -56,6 +57,12 @@ const LearningOutcomes = () => {
                 section_name: 'What Kids Learn'
               });
             }
+            
+            // Track in Microsoft Clarity
+            if (window.clarity) {
+              window.clarity('event', 'section_view_learning_outcomes');
+              window.clarity('set', 'section_viewed', 'learning_outcomes');
+            }
           }
         });
       },
@@ -75,18 +82,34 @@ const LearningOutcomes = () => {
   const handleAccordionChange = (value: string) => {
     setAccordionValue(value);
     
-    if (value && window.gtag) {
-      window.gtag('event', 'accordion_expand', {
-        event_category: 'engagement',
-        event_label: 'schedule_accordion',
-        action: 'expand'
-      });
-    } else if (!value && window.gtag) {
-      window.gtag('event', 'accordion_collapse', {
-        event_category: 'engagement',
-        event_label: 'schedule_accordion',
-        action: 'collapse'
-      });
+    if (value) {
+      if (window.gtag) {
+        window.gtag('event', 'accordion_expand', {
+          event_category: 'engagement',
+          event_label: 'schedule_accordion',
+          action: 'expand'
+        });
+      }
+      
+      // Track in Microsoft Clarity
+      if (window.clarity) {
+        window.clarity('event', 'accordion_expand');
+        window.clarity('set', 'accordion_state', 'expanded');
+      }
+    } else {
+      if (window.gtag) {
+        window.gtag('event', 'accordion_collapse', {
+          event_category: 'engagement',
+          event_label: 'schedule_accordion',
+          action: 'collapse'
+        });
+      }
+      
+      // Track in Microsoft Clarity
+      if (window.clarity) {
+        window.clarity('event', 'accordion_collapse');
+        window.clarity('set', 'accordion_state', 'collapsed');
+      }
     }
   };
 

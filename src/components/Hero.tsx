@@ -5,6 +5,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    clarity?: (command: string, ...args: any[]) => void;
   }
 }
 interface HeroProps {
@@ -67,8 +68,15 @@ const Hero = ({
                     button_location: 'hero_section'
                   });
                 }
+                
+                // Track Microsoft Clarity event
+                if (window.clarity) {
+                  window.clarity('event', 'cta_click_hero');
+                  window.clarity('set', 'button_clicked', 'hero_try_free');
+                }
+                
                 onEnrollClick();
-              }} 
+              }}
               data-track-id="cta-hero-try-free"
               className="w-full sm:w-full md:w-auto md:px-10 lg:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 sm:py-5 md:py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all text-base sm:text-lg md:text-xl"
             >

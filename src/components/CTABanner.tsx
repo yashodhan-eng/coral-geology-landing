@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    clarity?: (command: string, ...args: any[]) => void;
   }
 }
 
@@ -29,6 +30,13 @@ const CTABanner = ({ onEnrollClick }: CTABannerProps) => {
                 button_location: 'footer_section'
               });
             }
+            
+            // Track Microsoft Clarity event
+            if (window.clarity) {
+              window.clarity('event', 'cta_click_footer');
+              window.clarity('set', 'button_clicked', 'footer_try_free');
+            }
+            
             onEnrollClick();
           }}
           data-track-id="cta-footer-try-free"

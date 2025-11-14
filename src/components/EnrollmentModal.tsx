@@ -25,6 +25,7 @@ import { adCampaignService } from "@/lib/api";
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    clarity?: (command: string, ...args: any[]) => void;
     grecaptcha: {
       ready: (callback: () => void) => void;
       render: (container: HTMLElement, options: {
@@ -300,6 +301,13 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
           event_label: 'enrollment_form_submit',
           value: 1
         });
+      }
+      
+      // Track Microsoft Clarity conversion
+      if (window.clarity) {
+        window.clarity('event', 'enrollment_form_submit');
+        window.clarity('set', 'form_submitted', 'enrollment');
+        window.clarity('set', 'user_type', 'enrolled');
       }
 
       // Show success message
