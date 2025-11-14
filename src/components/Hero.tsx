@@ -74,7 +74,7 @@ const Hero = ({
                 <div className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground mt-1 md:mt-2 leading-tight mx-[10px] md:mx-0">of Collective Teaching Experience</div>
               </div>
               <div className="text-center md:border-l md:border-r md:border-primary/20 lg:border-0">
-                <div className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold text-primary">Stanford Alum</div>
+                <div className="text-base sm:text-xl md:text-3xl lg:text-4xl font-bold text-primary whitespace-nowrap">Stanford Alum</div>
                 <div className="text-[10px] sm:text-xs md:text-base lg:text-lg text-muted-foreground mt-1 md:mt-2 leading-tight mx-[10px] md:mx-0">Founder and Parent of Two</div>
               </div>
               <div className="text-center">
