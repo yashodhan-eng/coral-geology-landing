@@ -12,21 +12,21 @@ const learningPoints = [{
   description: "Complete hands-on science experiments and creative art projects at home. Make geology come alive beyond the classroom."
 }];
 const schedule = [{
-  week: "Week 1",
-  company: "Plate Tectonics & Seismology",
-  topics: "How Earth's plates move and cause earthquakes"
+  week: "Nov 17",
+  company: "Mineral Testing",
+  topics: "Identify minerals using hardness, streak, and other tests"
 }, {
-  week: "Week 2",
-  company: "The Shapes of Landforms",
-  topics: "Mountains, valleys, plains & Earth's geography"
+  week: "Nov 24",
+  company: "The Shapes of Crystals",
+  topics: "Explore crystal structures and geometric formations"
 }, {
-  week: "Week 3",
-  company: "Speleology (Cave Science)",
-  topics: "Formation of caves and underground systems"
+  week: "Dec 1",
+  company: "How to Find Fossils",
+  topics: "Learn fossil hunting techniques and preservation"
 }, {
-  week: "Week 4",
-  company: "Ask a Geologist",
-  topics: "Q&A session exploring your geology questions"
+  week: "Dec 8",
+  company: "Giants of the Past",
+  topics: "Titanoboa, deinosuchus, super salamanders & more"
 }];
 const LearningOutcomes = () => {
   return <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-4 bg-gradient-to-b from-background to-coral-secondary/10">
