@@ -44,7 +44,7 @@ const Hero = ({
 
             {/* Description - Condensed on Mobile */}
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto md:mx-auto lg:mx-0 leading-relaxed md:leading-relaxed">
-              <span className="block sm:hidden">Expert-guided geology sessions with immersive experiments that create exceptional learning week after week.</span>
+              <span className="block sm:hidden">Discover rocks, crystals, fossils, and prehistoric giants weekly through engaging experiments and guided discussions.</span>
               <span className="hidden sm:block">
                 Each week, learners explore new themes in geology & earth science. They will share rock collections, join discussions, and enjoy science experiments and art activities, blending the excitement of a science class with hands-on exploration.
               </span>
