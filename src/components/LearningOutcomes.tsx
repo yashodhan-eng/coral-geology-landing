@@ -26,7 +26,7 @@ const schedule = [{
 }, {
   week: "Week 4",
   company: "Giants of the Past",
-  topics: "Titanoboa, deinosuchus, super salamanders & more"
+  topics: "Learn about Titanoboa, deinosuchus, super salamanders & more"
 }];
 const LearningOutcomes = () => {
   return <section className="py-8 sm:py-10 md:py-12 lg:py-16 px-4 bg-gradient-to-b from-background to-coral-secondary/10">
