@@ -1,7 +1,7 @@
 // Environment configuration
 // For production deployment, update these values accordingly
 
-const isDevelopment = window.location.hostname === "localhost" || window.location.hostname.includes("lovable.app");
+const isDevelopment = true;
 
 export const config = {
   // Environment mode
