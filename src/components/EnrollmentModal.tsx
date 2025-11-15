@@ -280,14 +280,14 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
 
       // Get tracking parameters from current URL
       const currentUrl = new URLSearchParams(window.location.search);
-      const source = currentUrl.get('source') || '';
+      // const source = currentUrl.get('source') || '';
       const referrerId = currentUrl.get('referrerId') || '';
 
       // Build redirect URL with all query parameters
       const query = new URLSearchParams({
         name: data.parentName,
         email: data.email,
-        source: source,
+        source: "geology_landing",
         referrerId: referrerId,
         landing_variant: 'GeologyLanding',
         redirectTo: config.appEnv === 'development' ? 'https://www.preprod.coralacademy.com/class/this-class-will-be-on-zoom-sdk-8f0e37aa-664c-400e-bb6f-3757b27b38e5' : 'https://www.coralacademy.com/class/geologybyamalia-047f95a1-a506-421b-8f13-a986ac1eb225',
@@ -295,6 +295,9 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
         landing_secret: 'ca_landing_2025_3xD9pQ1Z'
       }).toString();
 
+      console.log('Submitting enrollment with data:', { ...data, recaptchaToken: freshToken });
+      const redirecturl = `${config.redirectBaseUrl}/thank-you-landing?name=${encodeURIComponent(data.parentName)}&email=${data.email}&source=geology_landing&referrerId=${encodeURIComponent(referrerId)}&landing_variant=GeologyLanding&redirectTo=${config.appEnv === 'development' ? 'https://www.preprod.coralacademy.com/class/this-class-will-be-on-zoom-sdk-8f0e37aa-664c-400e-bb6f-3757b27b38e5' : 'https://www.coralacademy.com/class/geologybyamalia-047f95a1-a506-421b-8f13-a986ac1eb225'}&landing_secret=ca_landing_2025_3xD9pQ1Z&recaptchaToken=${encodeURIComponent(freshToken)}`;
+      console.log('Redirect URL:', redirecturl);
       // Track GA4 conversion event
       if (window.gtag) {
         window.gtag('event', 'conversion', {
@@ -317,9 +320,10 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
       toast.success('Registration successful! Redirecting...');
 
       // Redirect to thank-you page after short delay
-      setTimeout(() => {
-        window.location.href = `${config.redirectBaseUrl}/thank-you-landing?${query}`;
-      }, 1500);
+      // setTimeout(() => {
+      //   // window.location.href = `${config.redirectBaseUrl}/thank-you-landing?${query}`;
+      //   window.location.href = redirecturl;
+      // }, 1500);
     } catch (error: any) {
       console.error("Submission error:", error);
       setIsSubmitting(false);
