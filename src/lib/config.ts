@@ -1,7 +1,7 @@
 // Environment configuration
 // For production deployment, update these values accordingly
 
-const isDevelopment = true;
+const isDevelopment = false;
 
 export const config = {
   // Environment mode
@@ -14,7 +14,7 @@ export const config = {
   recaptchaSiteKey: "6Lcnpv4rAAAAAOGN8RszPxz9mpL94Ql4FersrRc7",
 
   // Mixpanel Token (frontend token, safe to expose)
-  mixpanelToken: "c72bd1ecb2886bd2e9e755fb6e41acf3",
+  mixpanelToken: isDevelopment? "c72bd1ecb2886bd2e9e755fb6e41acf3": "341fbf2060d1c71a4d3c93b49cd31b19",
 
   // Redirect Base URL
   redirectBaseUrl: isDevelopment ? "https://preprod.coralacademy.com" : "https://www.coralacademy.com", // Update this with your production redirect URL
