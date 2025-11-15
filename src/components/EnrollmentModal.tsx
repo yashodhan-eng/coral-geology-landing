@@ -276,7 +276,7 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
 
       // Close modal and show loader
       onOpenChange(false);
-      setShowLoader(true);
+      // setShowLoader(true);
 
       // Get tracking parameters from current URL
       const currentUrl = new URLSearchParams(window.location.search);
@@ -320,10 +320,10 @@ const EnrollmentModal = ({ open, onOpenChange }: EnrollmentModalProps) => {
       toast.success('Registration successful! Redirecting...');
 
       // Redirect to thank-you page after short delay
-      // setTimeout(() => {
-      //   // window.location.href = `${config.redirectBaseUrl}/thank-you-landing?${query}`;
-      //   window.location.href = redirecturl;
-      // }, 1500);
+      setTimeout(() => {
+        // window.location.href = `${config.redirectBaseUrl}/thank-you-landing?${query}`;
+        window.location.href = redirecturl;
+      }, 1500);
     } catch (error: any) {
       console.error("Submission error:", error);
       setIsSubmitting(false);
