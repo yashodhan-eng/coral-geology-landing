@@ -1,7 +1,7 @@
 // API service for AdCampaigns backend integration
+import { config } from './config';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://api.preprod.coralacademy.com";
+const API_BASE_URL = config.apiBaseUrl;
 
 export interface AdCampaignRegisterRequest {
   name: string;
@@ -152,7 +152,7 @@ export const adCampaignService = {
   ): Promise<AdCampaignSigninResponse> {
     try {
       const redirectTo =
-        import.meta.env.VITE_APP_ENV === "development"
+        config.appEnv === "development"
           ? "https://www.preprod.coralacademy.com/class/lorem-epsum-cbdc05bd-eaf6-4b4f-b753-698b7a916dbf"
           : "https://www.coralacademy.com/class/minibusinessseries-c61a217d-9826-45e5-81a7-ff7cdca717b3";
       const payload = {
